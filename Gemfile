@@ -5,7 +5,7 @@ gem 'rails', '3.1.2'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -30,7 +30,8 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
+group :development, :test do
   # Pretty printed test output
+  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'turn', '0.8.2', :require => false
 end
