@@ -16,7 +16,7 @@ production:
   <<: *defaults
   app:
     name: Zollaria
-    auth_redirect_url: http://apps.facebook.com/zollaria/
+    auth_redirect_url: http://apps.facebook.com/zollaria/home/
   facebook:
     app_id: "421010801275638"
     app_secret: "d1d761d4d3bd85b5d05e6e9a7f780776"
