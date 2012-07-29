@@ -36,3 +36,6 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'turn', '0.8.2', :require => false
 end
+group :production do
+  gem "pg" 
+end
