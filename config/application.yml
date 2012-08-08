@@ -5,6 +5,10 @@ defaults: &defaults
   facebook:
     app_id: "392700677463970"
     app_secret: "ea40f3de763aed759dd88e23947fbf55"
+  amazon:
+    associate_tag: "zollaria-20"
+    access_key_id: "AKIAITELMYIODXH676PA"
+    secret_access_key: "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"
 
 development:
   <<: *defaults
@@ -20,4 +24,7 @@ production:
   facebook:
     app_id: "421010801275638"
     app_secret: "d1d761d4d3bd85b5d05e6e9a7f780776"
-
+  amazon:
+    associate_tag: "zollaria-20"
+    access_key_id: "AKIAITELMYIODXH676PA"
+    secret_access_key: "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"

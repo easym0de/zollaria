@@ -1,4 +1,12 @@
 Zollaria::Application.routes.draw do
+  get "search/search_result"
+
+  get "search_controller/search_result"
+
+  get "open/search_result"
+
+  get "open/close"
+
   get "home/index"
   
   match 'auth/:provider/callback', to: 'sessions#create'
@@ -6,6 +14,7 @@ Zollaria::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
   match 'canvas', to: redirect(Settings.app.auth_redirect_url)
   match '/home', to: 'home#index'
+  match '/search', to: 'search#search_result'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
