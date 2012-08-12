@@ -2,9 +2,17 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
-    #redirect_to root_url
-    #redirect_to 'http://apps.facebook.com/zollaria-dev/'
-    redirect_to '/canvas'
+    
+    if request.referer.blank?
+      redirect_to Settings.app.auth_redirect_url
+    else
+      if request.referer.include? 'apps.facebook.com'
+        redirect_to Settings.app.auth_redirect_url_in_app
+      else
+        redirect_to Settings.app.auth_redirect_url
+      end
+    end
+    
   end
 
   def destroy

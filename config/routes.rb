@@ -12,7 +12,6 @@ Zollaria::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
-  match 'canvas', to: redirect(Settings.app.auth_redirect_url)
   match '/home', to: 'home#index'
   match '/search', to: 'search#search_result'
 
