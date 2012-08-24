@@ -5,3 +5,10 @@
  *= require_self
  *= require_tree . 
 */
+#searchContainer{
+	background-color: #2ECCFA;
+}
+#mainContainer{
+	background-color: #E6E6E6;
+	min-height: 700px;
+}

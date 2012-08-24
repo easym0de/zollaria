@@ -1,0 +1,17 @@
+<p>Search Result for <%= @search_result[:query] %>:<p>
+	
+<% @search_result[:items].each do |item| %>
+  <%= form_tag("/buy", :metohod => "post") do%>
+    <div>
+      Title: <%= item[:title] %>
+      <br/>
+      Category: <%= item[:category] %>
+      <%= hidden_field_tag(:item_title, item[:title])%>
+      <br/>
+      <%= submit_tag("Buy") %>
+      <br/><br/>
+    </div>
+  <% end %>
+<% end %>
+
+

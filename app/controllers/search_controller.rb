@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  require amazon/ecs
   def search_result
     @search_result = {}
     @search_result[:query] = params[:query]
@@ -15,6 +16,7 @@ class SearchController < ApplicationController
     puts first_item.inspect
     
     item_attributes = first_item.get_element('ItemAttributes')
+    @search_result[:count] = res.items.count
     @search_result[:title] = item_attributes.get('Title')
     @search_result[:category] = item_attributes.get('ProductGroup')
   end

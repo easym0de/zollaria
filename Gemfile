@@ -34,6 +34,7 @@ gem 'amazon-ecs'
 
 group :development, :test do
   # Pretty printed test output
+  gem 'debugger'
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'turn', '0.8.2', :require => false
 end
