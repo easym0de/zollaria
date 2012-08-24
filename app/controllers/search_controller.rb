@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  require amazon/ecs
+  require 'amazon/ecs'
   def search_result
     @search_result = {}
     @search_result[:query] = params[:query]
