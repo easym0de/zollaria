@@ -1,7 +1,7 @@
 defaults: &defaults
   app:
     name: Zollaria-Dev
-    auth_redirect_url: http://apps.facebook.com/zollaria-dev/home/
+    auth_redirect_url: http://apps.facebook.com/zollaria-dev/
     auth_redirect_url_in_app: /home
   facebook:
     app_id: "392700677463970"
@@ -21,7 +21,7 @@ production:
   <<: *defaults
   app:
     name: Zollaria
-    auth_redirect_url: http://apps.facebook.com/zollaria/home/
+    auth_redirect_url: http://apps.facebook.com/zollaria/
     auth_redirect_url_in_app: /home
   facebook:
     app_id: "421010801275638"

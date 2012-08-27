@@ -19,12 +19,32 @@ class ShopController < ApplicationController
       item_attributes = item.get_element('ItemAttributes')
       current_item[:title] = item_attributes.get('Title')
       current_item[:category] = item_attributes.get('ProductGroup')
+      current_item[:asin] = item.get('ASIN')
       @search_result[:items].push(current_item)
     end
+    
   end
 
 
   def buy
-    @title = params[:item_title]
+    @title = params[:title]
+    asin = params[:asin]
+    unless current_user.nil?
+      
+      if current_user.books.blank?
+        current_user.books = asin
+      else
+        if current_user.books.include?(asin)
+          render :action => "duplicate"
+        else
+          current_user.books = current_user.books + "," + asin
+        end
+      end
+      current_user.save
+    end
+  end
+  
+  def duplicate
+    
   end
 end

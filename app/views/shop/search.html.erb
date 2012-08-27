@@ -6,7 +6,8 @@
       Title: <%= item[:title] %>
       <br/>
       Category: <%= item[:category] %>
-      <%= hidden_field_tag(:item_title, item[:title])%>
+      <%= hidden_field_tag(:title, item[:title])%>
+      <%= hidden_field_tag(:asin, item[:asin])%>
       <br/>
       <%= submit_tag("Buy") %>
       <br/><br/>
