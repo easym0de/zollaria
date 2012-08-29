@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/easym0de/amazon-ecs.git
-  revision: 1a5bd8b327af0beaecd544f916d48010b96f0a00
+  revision: faf404cfb541b97d5e405c567324f3d067f08b9d
   specs:
     amazon-ecs (2.2.4)
       nokogiri (~> 1.4)
