@@ -16,14 +16,19 @@ class HomeController < ApplicationController
       options[:AWS_secret_key] = Settings.amazon.secret_access_key
     end
     
-    res = Amazon::Ecs.item_lookup('059035342X')
+    #res = Amazon::Ecs.item_lookup('059035342X')
+    #res2 = Amazon::Ecs.items_lookup('059035342X,B000QCS8TW')
+    opts = {}
+    opts[:IdType] = "ASIN"
+    res2 = Amazon::Ecs.item_lookup('0545162076,059035342X,B000QCS8TW', opts)
     
     my_items = ''
-    res.items.each do |item|
+    res2.items.each do |item|
       item_attributes = item.get_element('ItemAttributes')
       my_items = my_items + item_attributes.get('Title') + ','
 
     end
+    
     
     @inventory[:books] = books
     @inventory[:movies] = movies

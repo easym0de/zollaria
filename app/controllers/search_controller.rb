@@ -10,7 +10,11 @@ class SearchController < ApplicationController
       options[:AWS_secret_key] = Settings.amazon.secret_access_key
     end
     
-    res = Amazon::Ecs.item_search(@search_result[:query], :search_index => 'All')
+    opts = {}
+    opts[:response_group] = "Medium"
+    opts[:search_index] = "All"
+    
+    res = Amazon::Ecs.item_search(@search_result[:query], opts)
     first_item = res.items.first
     
     puts first_item.inspect
@@ -19,5 +23,6 @@ class SearchController < ApplicationController
     @search_result[:count] = res.items.count
     @search_result[:title] = item_attributes.get('Title')
     @search_result[:category] = item_attributes.get('ProductGroup')
+    
   end
 end

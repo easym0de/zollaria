@@ -11,8 +11,11 @@ class ShopController < ApplicationController
       options[:AWS_secret_key] = Settings.amazon.secret_access_key
     end
     
-    res = Amazon::Ecs.item_search(params[:query], :search_index => 'All')
-    first_item = res.items.first
+    opts = {}
+    opts[:response_group] = "Large"
+    opts[:search_index] = "All"
+    
+    res = Amazon::Ecs.item_search(params[:query], opts)
     
     res.items.each do |item|
       current_item = {}
@@ -20,7 +23,25 @@ class ShopController < ApplicationController
       current_item[:title] = item_attributes.get('Title')
       current_item[:category] = item_attributes.get('ProductGroup')
       current_item[:asin] = item.get('ASIN')
-      @search_result[:items].push(current_item)
+      current_item[:detail_page_url] = item.get('DetailPageURL')
+      current_item[:small_image] = item.get_hash('SmallImage')["URL"]
+      
+      offer = item.get('Offers/Offer/OfferListing/Price/FormattedPrice')
+      
+      if offer.blank?
+        current_item[:price] = item.get('OfferSummary/LowestNewPrice/FormattedPrice')
+      else
+        current_item[:price] = offer
+      end
+      
+      # current_item[:item_main] = item
+      
+      
+      unless item_attributes.get('Binding').include?('Amazon Instant Video') 
+        @search_result[:items].push(current_item)
+      end
+      
+      
     end
     
   end
