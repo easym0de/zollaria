@@ -2,8 +2,12 @@
 	
 <% @search_result[:items].each do |item| %>
   <%= form_tag("/buy", :metohod => "post") do%>
-    <%= hidden_field_tag(:title, item[:title])%>
     <%= hidden_field_tag(:asin, item[:asin])%>
+    <%= hidden_field_tag(:title, item[:title])%>
+    <%= hidden_field_tag(:detail_page_url, item[:detail_page_url])%>
+    <%= hidden_field_tag(:category, item[:category])%>
+    <%= hidden_field_tag(:small_image, item[:small_image])%>
+    <%= hidden_field_tag(:price, item[:price])%>
     <div>
       <div id="image" class="image">
         <%= link_to image_tag(item[:small_image]), item[:detail_page_url], :target => "_blank"%>

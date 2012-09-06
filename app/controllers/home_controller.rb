@@ -1,13 +1,10 @@
 class HomeController < ApplicationController
   def index
     @inventory = {}
-    books = []
-    movies = []
-    gadgets = []
-    unless current_user.nil?
-      books = current_user.books
-      movies = current_user.movies
-      gadgets = current_user.gadgets 
+    items = []
+    
+    unless current_inventory.nil?
+      inventory = current_inventory.asin
     end
     
     Amazon::Ecs.configure do |options|
@@ -18,21 +15,31 @@ class HomeController < ApplicationController
     
     #res = Amazon::Ecs.item_lookup('059035342X')
     #res2 = Amazon::Ecs.items_lookup('059035342X,B000QCS8TW')
-    opts = {}
-    opts[:IdType] = "ASIN"
-    res2 = Amazon::Ecs.item_lookup('0545162076,059035342X,B000QCS8TW', opts)
+    #opts = {}
+    #opts[:IdType] = "ASIN"
+    #res2 = Amazon::Ecs.item_lookup('0545162076,059035342X,B000QCS8TW', opts)
     
-    my_items = ''
-    res2.items.each do |item|
-      item_attributes = item.get_element('ItemAttributes')
-      my_items = my_items + item_attributes.get('Title') + ','
+    #my_items = ''
+    #res2.items.each do |item|
+    #  item_attributes = item.get_element('ItemAttributes')
+    #  my_items = my_items + item_attributes.get('Title') + ','
 
+    #end
+    titles = ''
+    unless inventory.blank?
+      inventory.split(',').each do |id|
+        inventory_item = Product.find_by_asin(id)
+        unless inventory_item.blank?
+          item = {}
+          unless inventory_item.title.blank?
+            item[:title] = inventory_item.title
+            items.push(item)
+          end
+        end
+      end
     end
     
-    
-    @inventory[:books] = books
-    @inventory[:movies] = movies
-    @inventory[:gadgets] = gadgets
-    @inventory[:res] = my_items
+    @inventory[:inventory] = inventory
+    @inventory[:items] = items
   end
 end

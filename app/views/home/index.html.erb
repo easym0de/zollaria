@@ -1,8 +1,10 @@
-<h2>Your Inventory::</h2>
+<h2>Your Inventory:</h2>
 
-<%= @inventory.inspect.to_s %>
-
-
+<ul>
+  <% @inventory[:items].each do |item| %>
+    <li><%= item[:title] %></li>
+  <% end %>
+</ul>
 
 
 

@@ -11,7 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819060653) do
+ActiveRecord::Schema.define(:version => 20120906060923) do
+
+  create_table "accounts", :force => true do |t|
+    t.text     "balance"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "inventories", :force => true do |t|
+    t.text     "asin"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "title"
+    t.string   "category"
+    t.text     "detail_page_url"
+    t.string   "small_image"
+    t.string   "medium_image"
+    t.string   "large_image"
+    t.decimal  "price"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "asin"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "provider"
@@ -21,10 +46,8 @@ ActiveRecord::Schema.define(:version => 20120819060653) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "balance"
-    t.text     "books"
-    t.text     "movies"
-    t.text     "gadgets"
+    t.integer  "inventory_id"
+    t.integer  "account_id"
   end
 
 end
