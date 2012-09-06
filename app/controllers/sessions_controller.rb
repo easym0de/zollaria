@@ -4,10 +4,10 @@ class SessionsController < ApplicationController
     
     if user.inventory_id.blank?
       inventory = Inventory.create(:asin => '')
-    else
-      inventory = Inventory.find(user.inventory_id)
       user.inventory_id = inventory.id
       user.save
+    else
+      inventory = Inventory.find(user.inventory_id)
     end
     
     session[:user_id] = user.id
