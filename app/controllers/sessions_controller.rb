@@ -10,8 +10,17 @@ class SessionsController < ApplicationController
       inventory = Inventory.find(user.inventory_id)
     end
     
+    if user.account_id.blank?
+      account = Accounts.create(:asin => '')
+      user.account_id = account.id
+      user.save
+    else
+      account = account.find(user.account_id)
+    end
+    
     session[:user_id] = user.id
     session[:inventory_id] = user.inventory_id
+    session[:account_id] = user.account_id
     
     if request.referer.blank?
       redirect_to Settings.app.auth_redirect_url
