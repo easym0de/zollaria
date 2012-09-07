@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       user.account_id = account.id
       user.save
     else
-      account = account.find(user.account_id)
+      account = Account.find(user.account_id)
     end
     
     session[:user_id] = user.id
