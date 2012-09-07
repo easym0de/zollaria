@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     end
     
     if user.account_id.blank?
-      account = Account.create(:asin => '')
+      account = Account.create(:balance => 1000)
       user.account_id = account.id
       user.save
     else
