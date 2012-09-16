@@ -16,7 +16,7 @@ class ShopController < ApplicationController
     opts[:search_index] = "All"
     
     res = Amazon::Ecs.item_search(params[:query], opts)
-    
+    #puts "res: #{res.items}"
     res.items.each do |item|
       current_item = {}
       item_attributes = item.get_element('ItemAttributes')
@@ -25,7 +25,9 @@ class ShopController < ApplicationController
       current_item[:asin] = item.get('ASIN')
       current_item[:detail_page_url] = item.get('DetailPageURL')
       #current_item[:small_image] = item.get_hash('SmallImage')["URL"]
-      current_item[:small_image] = item.get_hash('ImageSets/ImageSet/SmallImage')["URL"]
+      unless item.get_hash('ImageSets/ImageSet/SmallImage').blank?
+        current_item[:small_image] = item.get_hash('ImageSets/ImageSet/SmallImage')["URL"]
+      end
       #current_item[:medium_image] = item.get_hash('ImageSets/ImageSet/MediumImage')["URL"]
       offer = item.get('Offers/Offer/OfferListing/Price/FormattedPrice')
       
@@ -47,40 +49,4 @@ class ShopController < ApplicationController
     
   end
 
-
-  def buy
-    @title = params[:title]
-    asin = params[:asin]
-    bought = false
-    unless current_inventory.nil?
-      
-      if current_inventory.asin.blank?
-        current_inventory.asin = asin
-        bought = true
-      else
-        if current_inventory.asin.include?(asin)
-          render :action => "duplicate"
-        else
-          current_inventory.asin = current_inventory.asin + "," + asin
-          bought = true
-        end
-      end
-      
-      if bought == true
-        product = Product.find_or_create_by_asin(asin)
-        product.title = params[:title]
-        product.category = params[:category]
-        product.detail_page_url = params[:detail_page_url]
-        product.small_image = params[:small_image]
-        product.price = params[:price]
-        product.save
-        current_inventory.save
-      end
-      
-    end
-  end
-  
-  def duplicate
-    
-  end
 end

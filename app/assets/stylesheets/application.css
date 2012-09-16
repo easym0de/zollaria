@@ -12,3 +12,14 @@
 	background-color: #FFFFFF;
 	min-height: 700px;
 }
+#image{
+  float: left;
+  text-align: center;
+  width: 115px;
+  margin-top:5px;
+}
+.buy_now{
+  background:url(buy_now.png);
+  background-size:80px 60px;
+  background-repeat:no-repeat;
+}
