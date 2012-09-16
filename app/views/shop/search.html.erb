@@ -10,7 +10,7 @@
     <%= hidden_field_tag(:price, item[:price])%>
     <div>
       <div id="image" class="image">
-        <%= link_to image_tag(item[:small_image]), item[:detail_page_url], :target => "_blank"%>
+        <%= link_to image_tag(item[:small_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
       </div>
       <%= link_to item[:title], item[:detail_page_url], :target => "_blank" %>
       <br/>
@@ -22,5 +22,7 @@
     </div>
   <% end %>
 <% end %>
+
+
 
 
