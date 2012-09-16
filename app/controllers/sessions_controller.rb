@@ -2,22 +2,6 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     
-    if user.inventory_id.blank?
-      inventory = Inventory.create(:asin => '')
-      user.inventory_id = inventory.id
-      user.save
-    else
-      inventory = Inventory.find(user.inventory_id)
-    end
-    
-    if user.account_id.blank?
-      account = Account.create(:balance => 1000)
-      user.account_id = account.id
-      user.save
-    else
-      account = Account.find(user.account_id)
-    end
-    
     session[:user_id] = user.id
     session[:inventory_id] = user.inventory_id
     session[:account_id] = user.account_id

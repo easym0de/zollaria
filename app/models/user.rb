@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :inventories
+  has_many :products, :through => :inventories
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -8,5 +10,20 @@ class User < ActiveRecord::Base
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
+  end
+  
+  def get_inventory
+    items = []
+    products = self.products
+    unless products.blank?
+      products.each do |product|
+        item = {}
+        unless product.title.blank?
+          item[:title] = product.title
+          items.push(item)
+        end
+      end
+    end
+    return items
   end
 end
