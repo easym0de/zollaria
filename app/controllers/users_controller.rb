@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def search
+    @search_result = User.search(params)
   end
   
 end

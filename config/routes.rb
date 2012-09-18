@@ -5,8 +5,6 @@ Zollaria::Application.routes.draw do
 
   get "users/search"
 
-  get "shop/search"
-
   get "shop/buy"
 
   get "search_controller/search_result"
@@ -19,7 +17,7 @@ Zollaria::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
   match '/home', to: 'users#home'
-  match '/search', to: 'shop#search'
+  match '/search', to: 'users#search'
   match '/buy', to: 'users#buy'
 
   # The priority is based upon order of creation:
