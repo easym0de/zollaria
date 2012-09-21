@@ -8,11 +8,20 @@ class UsersController < ApplicationController
   def buy
     @title = params[:title]
     product = Product.update_or_create(params)
-    inventory_item = Inventory.find_or_create_by_user_id_and_product_id(current_user.id, product.id)
+    
+    is_duplicate = Inventory.check_for_duplicate_or_create(current_user.id, product.id)
+    
+    if is_duplicate == true
+      render :action => "duplicate"  
+    end
   end
 
   def search
     @search_result = User.search(params)
+  end
+  
+  def duplicate
+    
   end
   
 end
