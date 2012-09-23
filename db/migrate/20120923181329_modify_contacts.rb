@@ -5,7 +5,7 @@ class ModifyContacts < ActiveRecord::Migration
     
     Account.reset_column_information
     Account.find_each { |a| a.update_attribute(:balance, a.balance_string) }
-    remove_column :accounts, :balace_string
+    remove_column :accounts, :balance_string
   end
 
   def down
