@@ -1,4 +1,4 @@
-class Modifyaccounts < ActiveRecord::Migration
+class ModifyContacts < ActiveRecord::Migration
   def up
     rename_column :accounts, :balance, :balance_string
     add_column :accounts, :balance, :decimal, :precision => 8, :scale => 2
