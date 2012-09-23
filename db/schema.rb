@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914050325) do
+ActiveRecord::Schema.define(:version => 20120923175111) do
 
   create_table "accounts", :force => true do |t|
-    t.text     "balance"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "balance",    :precision => 8, :scale => 2, :default => 500.0
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
+    t.integer  "user_id"
   end
 
   create_table "inventories", :force => true do |t|
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20120914050325) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "inventory_id"
-    t.integer  "account_id"
   end
 
 end

@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   require 'amazon/ecs'
+  has_one :account
   has_many :inventories
   has_many :products, :through => :inventories
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+    user = where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
@@ -11,6 +12,12 @@ class User < ActiveRecord::Base
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
+    
+    if user.account.nil?
+      user.create_account!
+    end
+    
+    return user
   end
   
   def get_inventory
@@ -26,6 +33,19 @@ class User < ActiveRecord::Base
       end
     end
     return items
+  end
+  
+  def get_balance
+    account = self.account
+    unless account.blank?
+      balance = account.balance
+    end
+    return balance
+  end
+  
+  def buy(price)
+    account = self.account
+    account.update_balance(price)
   end
   
   def self.search(params)

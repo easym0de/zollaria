@@ -8,6 +8,12 @@
 #searchContainer{
 	background-color: #2ECCFA;
 }
+
+#products_search{
+	width: 500px;
+	display:inline;
+}
+
 #mainContainer{
 	background-color: #FFFFFF;
 	min-height: 700px;

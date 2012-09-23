@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
     
     session[:user_id] = user.id
     session[:inventory_id] = user.inventory_id
-    session[:account_id] = user.account_id
     
     if request.referer.blank?
       redirect_to Settings.app.auth_redirect_url

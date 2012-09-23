@@ -12,7 +12,9 @@ class UsersController < ApplicationController
     is_duplicate = Inventory.check_for_duplicate_or_create(current_user.id, product.id)
     
     if is_duplicate == true
-      render :action => "duplicate"  
+      render :action => "duplicate"
+    else
+      current_user.buy(params[:price])    
     end
   end
 

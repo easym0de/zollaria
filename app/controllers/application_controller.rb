@@ -13,7 +13,12 @@ class ApplicationController < ActionController::Base
     @current_account ||= Account.find(session[:account_id]) if session[:account_id]
   end
   
+  def current_balance
+    @current_balance = current_user.get_balance
+  end
+  
   helper_method :current_user
   helper_method :current_inventory
+  helper_method :current_balance
   helper_method :current_account
 end
