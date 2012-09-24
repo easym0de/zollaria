@@ -18,6 +18,7 @@ Zollaria::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
   match '/home', to: 'users#home'
   match '/search', to: 'users#search'
+  match '/users/search', to: 'users#search'
   match '/buy', to: 'users#buy'
 
   # The priority is based upon order of creation:

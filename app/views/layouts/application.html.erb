@@ -7,15 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="searchContainer" class="searchContainer">
-  	
-    <%= form_tag "/search", :method => "get", :id => "products_search" do %>
-      <%= label_tag(:query, "Search for:") %>
-      <%= text_field_tag(:query) %>
-      <%= submit_tag("Search") %>
-    <% end %>
-    balance: <%= current_balance %>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Zollaria</a>
+        <%= form_tag( { :controller => 'users', :action => "search", :method => "get"}, :id => "products_search", :class => "navbar-search pull-left" ) do %>
+          <%= text_field_tag 'query', nil, :class => 'search-query' %>
+        <% end %>
+        <ul class="nav">
+          <li><a href="#">balance: $<%= current_balance %></a></li>
+        </ul>
+    </div>
   </div>
+
   <div id="mainContainer" class="mainContainer">
     <%= yield %>
   </div>
