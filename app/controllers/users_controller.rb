@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def home
+    puts "UsersController#home"
     unless current_user.blank?
       @items = current_user.get_inventory
     end
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def search
+    puts "UsersController#search"
     @search_result = User.search(params)
   end
   
