@@ -13,8 +13,10 @@ class User < ActiveRecord::Base
       user.save!
     end
     
-    if user.account.nil?
-      user.create_account!
+     if user.account.nil?
+      account = user.build_account
+      account.balance = 500.00
+      account.save!
     end
     
     return user

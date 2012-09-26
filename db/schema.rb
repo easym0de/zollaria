@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120923175111) do
+ActiveRecord::Schema.define(:version => 20120926020807) do
 
   create_table "accounts", :force => true do |t|
     t.decimal  "balance",    :precision => 8, :scale => 2, :default => 500.0
