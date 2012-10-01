@@ -10,7 +10,7 @@
   <% @items[:items_col1].each do |item| %>
     <div class="well-home">
       <div>
-      	  <% unless item[:medium_image] %>
+      	  <% unless item[:medium_image].blank? %>
             <%= link_to image_tag(item[:medium_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
 		  <% end %>
 		  <div>
@@ -24,7 +24,7 @@
   <% @items[:items_col2].each do |item| %>
     <div class="well-home">
       <div>
-        <% unless item[:medium_image] %>
+        <% unless item[:medium_image].blank? %>
           <%= link_to image_tag(item[:medium_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
 		<% end %>
         <div>
@@ -38,7 +38,7 @@
   <% @items[:items_col3].each do |item| %>
     <div class="well-home">
       <div>
-        <% unless item[:medium_image] %>
+        <% unless item[:medium_image].blank? %>
           <%= link_to image_tag(item[:medium_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
 		<% end %>
         <div>
@@ -52,7 +52,7 @@
   <% @items[:items_col4].each do |item| %>
     <div class="well-home">
       <div>
-        <% unless item[:medium_image] %>
+        <% unless item[:medium_image].blank? %>
           <%= link_to image_tag(item[:medium_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
 		<% end %>
         <div>
