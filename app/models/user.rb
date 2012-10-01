@@ -23,17 +23,39 @@ class User < ActiveRecord::Base
   end
   
   def get_inventory
-    items = []
+    items = {}
+    items_col1 = []
+    items_col2 = []
+    items_col3 = []
+    items_col4 = []
     products = self.products
     unless products.blank?
-      products.each do |product|
+      products.each_with_index do |product, index|
         item = {}
         unless product.title.blank?
           item[:title] = product.title
-          items.push(item)
+          item[:small_image] = product.small_image
+          item[:medium_image] = product.medium_image
+          item[:detail_page_url] = product.detail_page_url
+          item[:inventory_id] = Inventory.find_by_user_id_and_product_id(self.id, product.id).id
+
+          if index % 4 == 0
+            items_col1.push(item)
+          elsif index % 4 == 1
+            items_col2.push(item)
+          elsif index % 4 == 2
+            items_col3.push(item)
+          elsif index % 4 == 3
+            items_col4.push(item)
+          end
+
         end
       end
     end
+    items[:items_col1] = items_col1
+    items[:items_col2] = items_col2
+    items[:items_col3] = items_col3
+    items[:items_col4] = items_col4
     return items
   end
   
@@ -71,6 +93,10 @@ class User < ActiveRecord::Base
       #current_item[:small_image] = item.get_hash('SmallImage')["URL"]
       unless item.get_hash('ImageSets/ImageSet/SmallImage').blank?
         current_item[:small_image] = item.get_hash('ImageSets/ImageSet/SmallImage')["URL"]
+      end
+      
+      unless item.get_hash('ImageSets/ImageSet/MediumImage').blank?
+        current_item[:medium_image] = item.get_hash('ImageSets/ImageSet/MediumImage')["URL"]
       end
 
       offer = item.get('Offers/Offer/OfferListing/Price/FormattedPrice')

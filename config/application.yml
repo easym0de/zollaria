@@ -3,6 +3,8 @@ defaults: &defaults
     name: Zollaria-Dev
     auth_redirect_url: http://apps.facebook.com/zollaria-dev/
     auth_redirect_url_in_app: /home
+    full_host: http://apps.facebook.com/zollaria-dev
+    host: http://localhost:3000/
   facebook:
     app_id: "392700677463970"
     app_secret: "ea40f3de763aed759dd88e23947fbf55"
@@ -23,6 +25,8 @@ production:
     name: Zollaria
     auth_redirect_url: http://apps.facebook.com/zollaria/
     auth_redirect_url_in_app: /home
+    full_host: http://apps.facebook.com/zollaria-dev
+    host: http://zollaria.herokuapp.com/
   facebook:
     app_id: "421010801275638"
     app_secret: "d1d761d4d3bd85b5d05e6e9a7f780776"

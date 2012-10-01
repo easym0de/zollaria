@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
     product.category = params[:category]
     product.detail_page_url = params[:detail_page_url]
     product.small_image = params[:small_image]
+    product.medium_image = params[:medium_image]
     product.price = params[:price]
     product.save
     return product
