@@ -25,7 +25,7 @@ production:
     name: Zollaria
     auth_redirect_url: http://apps.facebook.com/zollaria/
     auth_redirect_url_in_app: /home
-    full_host: http://apps.facebook.com/zollaria-dev
+    full_host: http://apps.facebook.com/zollaria
     host: http://zollaria.herokuapp.com/
   facebook:
     app_id: "421010801275638"
