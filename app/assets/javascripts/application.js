@@ -15,3 +15,24 @@ $(function () {
     return false;
   });
 });
+
+$(function () {
+  $('#likeButton').live('click', function () {
+  	var status_text = $(this).find('#status_text').text();
+  	var path = '/like';
+  	if(status_text == 'Liked'){
+  		path = '/unlike'
+  	}
+
+  	var param = 'inventory_id=' + $(this).parent().attr('id')
+    $.get(path, param, null, 'script');
+    return false;
+  });
+})
+
+$(function () {
+  $('#nav_home').live('click', function () {
+    $.get('/home_ajax', $(this).serialize(), null, 'script');
+    return false;
+  });
+})

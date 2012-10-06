@@ -17,6 +17,13 @@
         <% end %>
         <ul class="nav">
           <li><a href="#">balance: $<%= current_balance %></a></li>
+          <li class="divider-vertical">
+          <li><%= link_to "home", {:controller => :user, :action => :home}, :id => 'nav_home'%></li>
+          <li class="divider-vertical">
+          <li><a href="#">friends</a></li>
+          <li class="divider-vertical">
+          <li><a href="#">shop</a></li>
+          <li class="divider-vertical">
         </ul>
     </div>
   </div>

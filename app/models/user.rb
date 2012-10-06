@@ -32,12 +32,33 @@ class User < ActiveRecord::Base
     unless products.blank?
       products.each_with_index do |product, index|
         item = {}
+        likes = []
         unless product.title.blank?
+          
+          item[:like_button_class] = 'btn-primary'
+          item[:status_text] = 'Like'
+          
+          inventory_item = Inventory.find_by_user_id_and_product_id(self.id, product.id)
+          inventory_item.likes.each do |like_item|
+            unless like_item.active == false
+              user = User.find(like_item.user_id)
+              like = {}
+              like[:name] = user.name
+              like[:user_id] = user.id
+              likes.push(like)
+              if self.id == user.id
+                item[:like_button_class] = 'btn-danger'
+                item[:status_text] = 'Liked'
+              end
+            end
+          end
+          
           item[:title] = product.title
           item[:small_image] = product.small_image
           item[:medium_image] = product.medium_image
           item[:detail_page_url] = product.detail_page_url
-          item[:inventory_id] = Inventory.find_by_user_id_and_product_id(self.id, product.id).id
+          item[:inventory_id] = inventory_item.id
+          item[:likes] = likes
 
           if index % 4 == 0
             items_col1.push(item)
@@ -58,6 +79,8 @@ class User < ActiveRecord::Base
     items[:items_col4] = items_col4
     return items
   end
+  
+  
   
   def get_balance
     account = self.account

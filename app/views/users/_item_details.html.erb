@@ -1,0 +1,10 @@
+
+<% unless item[:medium_image].blank? %>
+  <%= link_to image_tag(item[:medium_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
+<% end %>
+<div>
+  <%= item[:title] %>
+</div>
+<a href="#" class="btn <%= item[:like_button_class] %> btn-small" id="likeButton">
+  <i class="icon-heart icon-white"></i>&nbsp;<span id="status_text"><%= item[:status_text] %></span>
+</a> 

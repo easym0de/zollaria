@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env["omniauth.auth"])
     
     session[:user_id] = user.id
+    session[:profile_user_id] = user.id
     session[:inventory_id] = user.inventory_id
     
     if request.referer.blank?

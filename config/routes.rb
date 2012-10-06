@@ -18,6 +18,9 @@ Zollaria::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
   match '/home', to: 'users#home'
   match '/search', to: 'users#search'
+  match '/like', to: 'users#like'
+  match '/unlike', to: 'users#unlike'
+  match '/home_ajax', to: 'users#home_ajax'
   match '/users/search', to: 'users#search'
   match '/buy', to: 'users#buy'
 
