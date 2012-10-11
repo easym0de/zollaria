@@ -2,13 +2,13 @@ class UsersController < ApplicationController
   def home
     puts "UsersController#home"
     unless profile_user.blank?
-      @items = profile_user.get_inventory
+      @items = profile_user.get_inventory(current_user)
     end
   end
   
   def home_ajax
     unless profile_user.blank?
-      @items = profile_user.get_inventory
+      @items = profile_user.get_inventory(current_user)
     end
     respond_to do |format|
       format.js {render :partial => 'home'}
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     unless user.blank?
       profile_user = user
     end
-    @items = profile_user.get_inventory
+    @items = profile_user.get_inventory(current_user)
     respond_to do |format|
       format.js {render :partial => 'home'}
     end
@@ -64,13 +64,13 @@ class UsersController < ApplicationController
   end
   
   def like
-    like = Like.update_or_create(profile_user.id, params[:inventory_id])
+    like = Like.update_or_create(current_user.id, params[:inventory_id])
     
     unless like.unliked
       # TO DO: send notification
     end
     
-    @item = Inventory.get_inventory_item(params[:inventory_id], profile_user.id)
+    @item = Inventory.get_inventory_item(params[:inventory_id], current_user.id)
 
     respond_to do |format|
       format.js {render :partial => 'like'}
@@ -78,9 +78,9 @@ class UsersController < ApplicationController
   end
   
   def unlike
-    like = Like.unlike(profile_user.id, params[:inventory_id])
+    like = Like.unlike(current_user.id, params[:inventory_id])
     
-    @item = Inventory.get_inventory_item(params[:inventory_id], profile_user.id)
+    @item = Inventory.get_inventory_item(params[:inventory_id], current_user.id)
 
     respond_to do |format|
       format.js {render :partial => 'like'}

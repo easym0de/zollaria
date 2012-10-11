@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     return user
   end
   
-  def get_inventory
+  def get_inventory(current_user)
     items = {}
     items_col1 = []
     items_col2 = []
@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
               like[:name] = user.name
               like[:user_id] = user.id
               likes.push(like)
-              if self.id == user.id
+              if current_user.id == user.id
                 item[:like_button_class] = 'btn-danger'
                 item[:status_text] = 'Liked'
               end
