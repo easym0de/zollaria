@@ -29,11 +29,11 @@ class UsersController < ApplicationController
   def friends_main
     @graph = Koala::Facebook::API.new(facebook_auth)
   
-    fql_friends_on_zollaria = 'SELECT uid, name, pic_small FROM user WHERE has_added_app=1 and uid IN (SELECT uid2 FROM friend WHERE uid1 = me())'
+    fql_friends_on_zollaria = 'select uid, name, pic_small from user where has_added_app=1 and uid in(select uid2 FROM friend where uid1 = me())'
     @friends_on_zollaria =  @graph.fql_query(fql_friends_on_zollaria)
   
     @friends_on_zollaria.each do |friend|
-      user = User.find_by_uid(friend["uid"])  
+      user = User.find_by_uid(friend["uid"].to_s)  
       unless user.blank?
         friend["item_count"] = user.products.size
       end
