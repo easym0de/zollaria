@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
-    
+    omniauth = env["omniauth.auth"]
     session[:user_id] = user.id
     session[:profile_user_id] = user.id
     session[:inventory_id] = user.inventory_id
+    session[:facebook_auth] = omniauth['credentials']['token']
     
     if request.referer.blank?
       redirect_to Settings.app.auth_redirect_url

@@ -36,3 +36,26 @@ $(function () {
     return false;
   });
 })
+
+$(function () {
+  $('#nav_friends').live('click', function () {
+    $.get('/friends_main', $(this).serialize(), null, 'script');
+    return false;
+  });
+})
+
+$(function () {
+  $('#nav_shop').live('click', function () {
+    $.get('/shop', $(this).serialize(), null, 'script');
+    return false;
+  });
+  
+$(function () {
+  $('#viewProfile').live('click', function () {
+    var param = 'uid=' + $(this).parent().attr('id')
+    $.get('/view_friend_profile', param, null, 'script');
+    return false;
+  });
+})
+
+})

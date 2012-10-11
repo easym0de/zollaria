@@ -1,0 +1,29 @@
+<div>
+  <h1 style="text-align: center;">
+    Your Friends on Zollaria
+  </h1>
+</div>
+
+<%= @friends_on_zollaria.inspect %>
+
+<div class="hero-unit ">
+<div class="row">
+
+<div class="span3">
+  <% @friends_on_zollaria.each do |friend| %>
+    <div class="well-home">
+      <div>
+	  <%= link_to image_tag(friend["pic_small"], :alt=> friend["name"]), friend["pic_small"], :target => "_blank"%>
+        <%= friend["name"] %>
+      </div>
+	  <div style="margin-top:10px;" id="<%= friend["uid"] %>">
+	  <a href="#" class="btn btn-primary btn-small" id="viewProfile">
+	    View Profile
+	  </a>
+	  </div>	
+    </div>
+  <% end%>
+</div>
+
+</div>
+</div>

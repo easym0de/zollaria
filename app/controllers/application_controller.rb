@@ -21,9 +21,14 @@ class ApplicationController < ActionController::Base
     @profile_user ||= User.find(session[:profile_user_id]) if session[:profile_user_id]
   end
   
+  def facebook_auth
+    @facebook_auth = session[:facebook_auth]
+  end
+  
   helper_method :current_user
   helper_method :profile_user
   helper_method :current_inventory
   helper_method :current_balance
   helper_method :current_account
+  helper_method :facebook_auth
 end

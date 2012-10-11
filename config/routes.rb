@@ -21,6 +21,9 @@ Zollaria::Application.routes.draw do
   match '/like', to: 'users#like'
   match '/unlike', to: 'users#unlike'
   match '/home_ajax', to: 'users#home_ajax'
+  match '/friends_main', to: 'users#friends_main'
+  match '/view_friend_profile', to: 'users#view_friend_profile'
+  match '/shop', to: 'users#shop'
   match '/users/search', to: 'users#search'
   match '/buy', to: 'users#buy'
 

@@ -14,6 +14,41 @@ class UsersController < ApplicationController
       format.js {render :partial => 'home'}
     end
   end
+  
+  def view_friend_profile
+    user = User.find_by_uid(params[:uid])
+    unless user.blank?
+      profile_user = user
+    end
+    @items = profile_user.get_inventory
+    respond_to do |format|
+      format.js {render :partial => 'home'}
+    end
+  end
+  
+  def friends_main
+    @graph = Koala::Facebook::API.new(facebook_auth)
+  
+    fql_friends_on_zollaria = 'SELECT uid, name, pic_small FROM user WHERE has_added_app=1 and uid IN (SELECT uid2 FROM friend WHERE uid1 = me())'
+    @friends_on_zollaria =  @graph.fql_query(fql_friends_on_zollaria)
+  
+    @friends_on_zollaria.each do |friend|
+      user = User.find_by_uid(friend["uid"])  
+      unless user.blank?
+        friend["item_count"] = user.products.size
+      end
+    end
+
+    respond_to do |format|
+      format.js {render :partial => 'friends_home'}
+    end
+  end
+  
+  def shop
+    respond_to do |format|
+      format.js {render :partial => 'shop'}
+    end
+  end
 
   def buy
     @title = params[:title]
@@ -36,11 +71,7 @@ class UsersController < ApplicationController
     end
     
     @item = Inventory.get_inventory_item(params[:inventory_id], profile_user.id)
-    #item = Inventory.check_for_duplicate_or_create(current_user.id, product.id)
-    #params_ajax = params
-    #debugger
-    #params_jax2 = params[:a]
-    #puts "UsersController#like"
+
     respond_to do |format|
       format.js {render :partial => 'like'}
     end

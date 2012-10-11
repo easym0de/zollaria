@@ -19,6 +19,7 @@ end
 gem 'jquery-rails'
 gem "settingslogic", "2.0.6"
 gem 'omniauth-facebook'
+gem 'koala'
 gem 'amazon-ecs', :git => "https://github.com/easym0de/amazon-ecs.git"
 
 # To use ActiveModel has_secure_password
