@@ -8,3 +8,13 @@
 <a href="#" class="btn <%= item[:like_button_class] %> btn-small" id="likeButton">
   <i class="icon-heart icon-white"></i>&nbsp;<span id="status_text"><%= item[:status_text] %></span>
 </a> 
+<div>
+	<% item[:likes].each_with_index do |like, index| %>
+	  <% if index == 0 %>
+	    <i class="icon-heart"></i>
+	  <% else %>
+	    ,&nbsp;
+	  <% end %>
+	  <%= like[:name] %>
+	<% end %>
+</div>
