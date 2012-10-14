@@ -50,17 +50,30 @@ class UsersController < ApplicationController
     end
   end
 
-  def buy
+  def buy_check
     @title = params[:title]
+    @params = params
     product = Product.update_or_create(params)
     
-    is_duplicate = Inventory.check_for_duplicate_or_create(current_user.id, product.id)
-    
+    is_duplicate = Inventory.check_for_duplicate(current_user.id, product.id)
+    @params[:balance_after_purchase] = current_user.calculate_balance_after_purchase(params[:price])
+   
+    @params[:action] = 'buy_confirm'
+
     if is_duplicate == true
-      render :action => "duplicate"
-    else
-      current_user.buy(params[:price])    
+      @params[:action] = 'duplicate'
     end
+    
+    if @params[:balance_after_purchase] < 0
+      @params[:action] = 'insufficient_balance'
+    end 
+  end
+  
+  def buy_confirm
+    @params = params
+    product = Product.update_or_create(params)
+    Inventory.check_for_duplicate_or_create(current_user.id, product.id)
+    current_user.buy(params[:price])
   end
   
   def like

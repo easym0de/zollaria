@@ -1,0 +1,46 @@
+<div>
+  <h1 style="text-align: center;">
+    Are you sure you want to buy the following?
+  </h1>
+</div>
+
+<div class="hero-unit " >
+  <div class="row" style="text-align: center">
+    <div class="span3" style="margin-left: 415px;">
+      <div class="well-home">
+        <%= form_tag("/buy", :metohod => "post") do%>
+        <%= hidden_field_tag(:asin, @params[:asin])%>
+        <%= hidden_field_tag(:title, @params[:title])%>
+        <%= hidden_field_tag(:detail_page_url, @params[:detail_page_url])%>
+        <%= hidden_field_tag(:category, @params[:category])%>
+        <%= hidden_field_tag(:small_image, @params[:small_image])%>
+        <%= hidden_field_tag(:medium_image, @params[:medium_image])%>
+        <%= hidden_field_tag(:price, @params[:price])%>
+      <div>
+      
+        <% unless @params[:medium_image].blank? %>
+          <%= link_to image_tag(@params[:medium_image], :alt=> @params[:title]), @params[:detail_page_url], :target => "_blank"%>
+        <% end %>
+        <div>
+          <%= @params[:title] %>
+        </div>
+		Category: <%= @params[:category] %>
+		<ul class="nav nav-list">
+          <li class="divider"></li>
+        </ul>       
+        Current Balance: $<%= current_balance %>
+        <br/>
+	    Price: <%= @params[:price] %>
+	    <ul class="nav nav-list">
+          <li class="divider"></li>
+        </ul>
+	    After Purchase: $<%= @params[:balance_after_purchase] %>
+	    <br/>
+        <a href="#" class="btn btn-primary" id="buy_confirm" >Buy</a>
+        <br/>
+        <%= link_to 'See your Inventory!', '/home' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

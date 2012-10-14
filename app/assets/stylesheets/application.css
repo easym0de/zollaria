@@ -6,6 +6,15 @@
  *= require_self
  *= require_tree . 
 */
+
+.hero-unit {
+    background-color: #EEEEEE;
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 30px;
+	padding: 20px 60px;
+}
+
+
 #searchContainer{
 	background-color: #2ECCFA;
 }

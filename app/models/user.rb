@@ -90,6 +90,11 @@ class User < ActiveRecord::Base
     return balance
   end
   
+  def calculate_balance_after_purchase(price)
+    account = self.account
+    return account.calculate_balance_after_purchase(price)
+  end
+  
   def buy(price)
     account = self.account
     account.update_balance(price)

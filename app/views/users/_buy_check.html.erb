@@ -1,0 +1,9 @@
+$('#query').focus();
+
+<% if @is_duplicate == true %>
+
+$("#mainContainer").html("<%= escape_javascript render :partial => "duplicate" %>");
+
+<% end %>
+
+$("#mainContainer").html("<%= escape_javascript render :partial => "duplicate" %>");

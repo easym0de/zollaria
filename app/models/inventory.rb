@@ -15,6 +15,16 @@ class Inventory < ActiveRecord::Base
     return false
   end
   
+  def self.check_for_duplicate(user_id, product_id)
+    inventory_item = self.find_by_user_id_and_product_id(user_id, product_id)
+    
+    unless inventory_item.nil?
+      return true
+    end
+    
+    return false
+  end
+  
   def self.get_inventory_item(inventory_id, user_id)
     inventory_item = Inventory.find(inventory_id)
     product = inventory_item.product

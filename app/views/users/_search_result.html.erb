@@ -18,7 +18,9 @@
       Category: <%= item[:category] %>
       <br/>
       <%= item[:price] %>
-      <%= image_submit_tag("buy.png", { :width =>'100', :height=>'40' , :alt=>'thumb'}) %>
+      <a href="#" class="btn btn-primary btn-small" id="buy_check" >
+      	&nbsp;&nbsp;Buy&nbsp;&nbsp;
+	  </a>
       <br/><br/>
     </div>
   <% end %>

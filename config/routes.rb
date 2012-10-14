@@ -25,6 +25,8 @@ Zollaria::Application.routes.draw do
   match '/view_friend_profile', to: 'users#view_friend_profile'
   match '/shop', to: 'users#shop'
   match '/users/search', to: 'users#search'
+  match '/buy_check', to: 'users#buy_check'
+  match '/buy_confirm', to: 'users#buy_confirm'
   match '/buy', to: 'users#buy'
 
   # The priority is based upon order of creation:
