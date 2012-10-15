@@ -11,13 +11,16 @@
   <% @friends_on_zollaria.each do |friend| %>
     <div class="well-home">
       <div>
-	  <%= link_to image_tag(friend["pic_small"], :alt=> friend["name"]), friend["pic_small"], :target => "_blank"%>
+	    <%= link_to image_tag(friend["pic_small"], :alt=> friend["name"]), friend["pic_small"], :target => "_blank"%>
         <%= friend["name"] %>
       </div>
 	  <div style="margin-top:10px;" id="<%= friend["uid"] %>">
-	  <a href="#" class="btn btn-primary btn-small" id="viewProfile">
-	    View Profile
-	  </a>
+	    <%= form_tag("/view_friend_profile", :metohod => "post") do%>
+          <%= hidden_field_tag(:uid, friend["uid"] )%>
+          <%= hidden_field_tag(:name, friend["name"] )%>
+          <%= hidden_field_tag(:pic_small, friend["pic_small"] )%>
+	      <a href="#" class="btn btn-primary btn-small" id="viewProfile">View Profile</a>
+	    <% end%>
 	  </div>	
     </div>
   <% end%>

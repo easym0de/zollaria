@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def home
-    puts "UsersController#home"
     unless profile_user.blank?
       @items = profile_user.get_inventory(current_user)
     end
@@ -21,6 +20,8 @@ class UsersController < ApplicationController
       profile_user = user
     end
     @items = profile_user.get_inventory(current_user)
+    @name = params[:name]
+    @pic_small = params[:pic_small]
     respond_to do |format|
       format.js {render :partial => 'home'}
     end
@@ -101,7 +102,6 @@ class UsersController < ApplicationController
   end
 
   def search
-    puts "UsersController#search"
     @search_result = User.search(params)
   end
   

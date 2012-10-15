@@ -1,7 +1,12 @@
 <div>
-  <h1 style="text-align: center;">
-    Your Inventory
-  </h1>
+  <h4 style="text-align: center;">
+  	<% if @name.blank? %>
+  	  Your Inventory
+  	<% else %>
+      <%= link_to image_tag(@pic_small, :alt=> @name), @pic_small, :target => "_blank"%>
+      <%= @name %>'s Inventory
+    <% end %>
+  </h4>
 </div>
 
 <div class="hero-unit ">

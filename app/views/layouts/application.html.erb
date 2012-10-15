@@ -16,7 +16,7 @@
           <%= text_field_tag 'query', nil, :class => 'search-query' %>
         <% end %>
         <ul class="nav">
-          <li><a href="#">balance: $<%= current_balance %></a></li>
+          <li><a href="#" id="balance">balance: $<%= current_balance %></a></li>
           <li class="divider-vertical">
           <li><%= link_to "home", {:controller => :user, :action => :home}, :id => 'nav_home'%></li>
           <li class="divider-vertical">

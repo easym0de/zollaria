@@ -101,6 +101,11 @@ class User < ActiveRecord::Base
   end
   
   def self.search(params)
+    items = {}
+    items_col1 = []
+    items_col2 = []
+    items_col3 = []
+    items_col4 = []
     @search_result = {}
     @search_result[:query] = params[:query]
     @search_result[:items] = []
@@ -137,11 +142,40 @@ class User < ActiveRecord::Base
 
       if !item_attributes.get('Binding').blank? && item_attributes.get('Binding').include?('Amazon Instant Video') 
       else
-        @search_result[:items].push(current_item)
+        column = self.calculate_column(items_col1, items_col2, items_col3, items_col4)
+        if column == 1
+          items_col1.push(current_item)
+        elsif column == 2
+          items_col2.push(current_item)
+        elsif column == 3
+          items_col3.push(current_item)
+        elsif column == 4
+          items_col4.push(current_item)
+        end
       end
     end
     
+    items[:items_col1] = items_col1
+    items[:items_col2] = items_col2
+    items[:items_col3] = items_col3
+    items[:items_col4] = items_col4
+    @search_result[:items] = items
     return @search_result
     
   end
+  
+  def self.calculate_column(col1, col2, col3, col4)
+    if col1.size == col4.size
+      return 1
+    end
+    if col2.size == col4.size
+      return 2
+    end
+    if col3.size == col4.size
+      return 3
+    end
+    return 4
+  end
+
 end
+

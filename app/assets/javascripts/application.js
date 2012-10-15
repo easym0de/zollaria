@@ -66,8 +66,7 @@ $(function () {
  }) 
 $(function () {
   $('#viewProfile').live('click', function () {
-    var param = 'uid=' + $(this).parent().attr('id');
-    $.get('/view_friend_profile', param, null, 'script');
+    $.get('/view_friend_profile', $(this).closest('form').serialize(), null, 'script');
     return false;
   });
 })

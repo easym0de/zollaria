@@ -1,27 +1,31 @@
-<p>Search Result for <%= @search_result[:query] %>:<p>
-	
-<% @search_result[:items].each do |item| %>
-  <%= form_tag("/buy", :metohod => "post") do%>
-    <%= hidden_field_tag(:asin, item[:asin])%>
-    <%= hidden_field_tag(:title, item[:title])%>
-    <%= hidden_field_tag(:detail_page_url, item[:detail_page_url])%>
-    <%= hidden_field_tag(:category, item[:category])%>
-    <%= hidden_field_tag(:small_image, item[:small_image])%>
-    <%= hidden_field_tag(:medium_image, item[:medium_image])%>
-    <%= hidden_field_tag(:price, item[:price])%>
-    <div>
-      <div id="image" class="image">
-        <%= link_to image_tag(item[:small_image], :alt=> item[:title]), item[:detail_page_url], :target => "_blank"%>
-      </div>
-      <%= link_to item[:title], item[:detail_page_url], :target => "_blank" %>
-      <br/>
-      Category: <%= item[:category] %>
-      <br/>
-      <%= item[:price] %>
-      <a href="#" class="btn btn-primary btn-small" id="buy_check" >
-      	&nbsp;&nbsp;Buy&nbsp;&nbsp;
-	  </a>
-      <br/><br/>
-    </div>
-  <% end %>
-<% end %>
+<div>
+  <h1 style="text-align: center;">
+    Search Result for <%= @search_result[:query] %>
+  </h1>
+</div>
+
+<div class="hero-unit ">
+<div class="row" style="text-align: center">
+<div class="span3">
+  <% @search_result[:items][:items_col1].each do |item| %>
+    <%= render 'search_result_item_details', :item => item %>
+  <% end%>
+</div>
+<div class="span3">
+  <% @search_result[:items][:items_col2].each do |item| %>
+    <%= render 'search_result_item_details', :item => item %>
+  <% end%>
+</div>
+<div class="span3">
+  <% @search_result[:items][:items_col3].each do |item| %>
+    <%= render 'search_result_item_details', :item => item %>
+  <% end%>
+</div>
+<div class="span3">
+  <% @search_result[:items][:items_col4].each do |item| %>
+    <%= render 'search_result_item_details', :item => item %>
+  <% end%>
+</div>
+</div>
+</div>
+
